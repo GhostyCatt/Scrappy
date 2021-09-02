@@ -20,13 +20,13 @@ class Dropdown(Select):
 
         # Options in select menu
         options = [
-            nextcord.SelectOption(label = f'Home Page', description = f'Back to main home page', value = 'Home')
+            nextcord.SelectOption(label = f'Home Page', description = f'Back to main home page.', value = 'Home')
         ]
 
         # Append cog options
         for cog, commands in mapping.items():
             name = getattr(cog, "qualified_name", "Isolated_Commands")
-            description = getattr(cog, "description", "No description provided")
+            description = getattr(cog, "description", "Stand-alone commands that exist outside of cogs.")
 
             cog_ignore = ["CommandErrorHandler", "GuildProfileManager"]
             if name in cog_ignore:
@@ -77,6 +77,12 @@ class ButtonArrayMain(View):
         self.add_item(nextcord.ui.Button(label = "Website", url = Options['Website']))
         self.add_item(Dropdown(self.ctx, self.mapping, self.help, self.homepage))
     
+
+    @nextcord.ui.button(label = 'Home Page', style = nextcord.ButtonStyle.green)
+    async def dash_home(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+        """Return to home page"""
+        await interaction.response.edit_message(embed = self.homepage)
+
 
     @button(label = 'Disable', style = nextcord.ButtonStyle.red)
     async def  dash_cancel(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
