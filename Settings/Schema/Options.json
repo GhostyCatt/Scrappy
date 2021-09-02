@@ -1,0 +1,62 @@
+{
+    "DefaultPrefix": ".",
+
+    "Website": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+
+    "InviteLink": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+
+    "Database": {
+        "Cluster": "Scrappy",
+        "Database": "ScrappyData",
+        "Collections": {
+            "Guild": "Guild_Data"
+        }
+    },
+
+    "Colors": {
+        "Success": "0x58AFF2",
+        "Neutral": "0x5865F2",
+        "Fail": "0xb458f2"
+    },
+
+    "Emojis": {
+        "Bell": "<:1032blurplebell:882458368025960449>",
+        "Camera": "<:7991blurplecamera:882458367975653426>",
+        "Gift": "<:8564blurplegift:882458368143396885>",
+        "Announcements": "<:announcements:882458368105664562>",
+        "Moderator": "<:certifiedmoderator:882458368093085737>",
+        "Compass": "<:compass:882458368332161094>",
+        "Deafened": "<:deafened:882458368361508934>",
+        "Disconnect": "<:disconnect:882458367954649168>",
+        "Members": "<:members:882458367963062322>",
+        "Link": "<:link:882458368382484541>",
+        "Line": "<:line:882458367858204682>",
+        "Library": "<:library:882458367916912750>",
+        "Invite": "<:invite:882458368017580043>",
+        "Integration": "<:integration:882458367942078464>",
+        "Inbox": "<:inbox:882458367946264657>",
+        "Image": "<:image:882458368076316682>",
+        "Employee": "<:employee:882458368105672775>",
+        "Muted": "<:muted:882458368164376626>",
+        "Partner": "<:partner:882458368009175141>",
+        "Search": "<:search:882458368269230100>",
+        "Rules": "<:rules:882458368109850664>",
+        "Settings": "<:settings:882458368160174162>",
+        "Shop": "<:shop:882458368139214908>",
+        "Star": "<:star:882458367556223047>",
+        "Support": "<:support:882458368227295313>",
+        "TextChannel": "<:textchannel:882458367883362364>",
+        "VoiceChannel": "<:voicechannel:882458368067911732>",
+        "Verified": "<:verified:882458367593963571>",
+        "UnMuted": "<:unmuted:882458367690407977>",
+        "UnDeafened": "<:undeafened:882458367988236358>",
+        "Ticket": "<:ticket:882458368210509844>",
+        "Upvote": "<:upvote:882461392412737587>",
+        "Downvote": "<:downvote:882461390902804551>"
+    },
+
+    "Developers": [
+        543041032648917022,
+        852807087019917384
+    ]
+}

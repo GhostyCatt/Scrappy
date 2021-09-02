@@ -1,0 +1,18 @@
+{
+    "English-US": {
+        "Success": "Success!",
+        "Fail": "Something went wrong..."
+    },
+    "French": {
+        "Success": "Succès",
+        "Fail": "Quelque chose s'est mal passé"
+    },
+    "German": {
+        "Success": "Erfolg",
+        "Fail": "Etwas ist schief gelaufen"
+    },
+    "Spanish": {
+        "Success": "Éxito",
+        "Fail": "Algo salió mal"
+    }
+}

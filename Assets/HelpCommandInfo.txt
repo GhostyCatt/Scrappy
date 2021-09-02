@@ -1,0 +1,15 @@
+**The Help Command**
+
+Scrappy uses the prefix `.` by default, this can be changed using the `.prefix` command.
+
+To call any command, use the prefix followed by the commands name followed by the arguments the command may require. `eg: .help [command / module]`
+
+```md
+# Required Arguements
+< arguments >
+
+# Optional Arguements
+< arguments >
+```
+
+You can also use **Slash Commands** by typing `/` and selecting Scrappy from the menu.
