@@ -1,3 +1,5 @@
 .Env
 
 .GitIgnore
+
+__pycache__/
