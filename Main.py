@@ -11,6 +11,10 @@ with open('Settings/Options.json') as Settings:
     Options = json.load(Settings)
 
 # Initialise Bot object
+intents = nextcord.Intents.all()
+intents.members = True
+intents.guilds = True
+
 Bot = commands.Bot(
     command_prefix = ( GetPrefix ),
     description = 'Scrappy\'s Scrapyard',
@@ -18,7 +22,8 @@ Bot = commands.Bot(
     owner_ids = Options['Developers'],
     help_command = Help(),
     activity = nextcord.Activity(type = nextcord.ActivityType.listening, name = f"{Options['DefaultPrefix']}help"),
-    status = nextcord.Status.idle
+    status = nextcord.Status.idle,
+    intents = intents
 )
 
 # Initialise Colorama for console messages
