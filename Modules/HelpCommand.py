@@ -28,7 +28,7 @@ class Dropdown(Select):
             name = getattr(cog, "qualified_name", "Isolated_Commands")
             description = getattr(cog, "description", "No description provided")
 
-            cog_ignore = ["CommandErrorHandler"]
+            cog_ignore = ["CommandErrorHandler", "GuildProfileManager"]
             if name in cog_ignore:
                 pass
             else:
@@ -212,7 +212,7 @@ class Help(commands.HelpCommand):
         for cog, commands in mapping.items():
             name = getattr(cog, "qualified_name", "Isolated Commands")
 
-            cog_ignore = ["Isolated Commands", "CommandErrorHandler"]
+            cog_ignore = ["Isolated Commands", "CommandErrorHandler", "GuildProfileManager"]
             if name in cog_ignore:
                 pass
             else:
