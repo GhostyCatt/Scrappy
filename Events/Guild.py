@@ -30,12 +30,10 @@ class ButtonArray(View):
 
     * Context
     """
-    def __init__(self, ctx):
+    def __init__(self):
         super().__init__(timeout = 30)
 
-        self.response = None
-        self.ctx = ctx
-    
+        self.response = None    
 
     @button(label = '⛔ Dismiss', style = nextcord.ButtonStyle.blurple)
     async def  dash_cancel(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
@@ -85,7 +83,7 @@ class GuildProfileManager(commands.Cog):
         )
         
         try:
-            # Get # General
+            # Get #General channel
             general = nextcord.utils.find(lambda x: x.name == 'general',  guild.text_channels)
 
             if general and general.permissions_for(guild.me).send_messages:
@@ -93,7 +91,8 @@ class GuildProfileManager(commands.Cog):
                 view = ButtonArray()
                 await general.send(embed = JoinEmbed, view = view)
 
-        except: pass
+        except:
+            pass
 
 
 # Add error handler to the bot
