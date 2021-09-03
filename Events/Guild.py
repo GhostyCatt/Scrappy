@@ -59,7 +59,7 @@ class GuildProfileManager(commands.Cog):
 
         Triggers when bot joins a guild.
         """
-        print('anc')
+        print(guild.text_channels)
         # Get guild profile template
         with open('Settings/Schema/Guild.json', 'r', encoding = 'utf-8') as RawGuildProfile:
             GuildProfileTemplate = json.load(RawGuildProfile)
@@ -86,22 +86,12 @@ class GuildProfileManager(commands.Cog):
             "Scrappy!",
             JoinMessage
         )
-        
-        try:
-            # Get #General channel
-            general = nextcord.utils.find(lambda x: x.name == 'general',  guild.text_channels)
+    
+        # Send embed in the first channel
+        channel = guild.text_channels[0]
 
-            if general and general.permissions_for(guild.me).send_messages:
-                # Send the embed in #general if possible
-                view = ButtonArray()
-                view.response = await general.send(embed = JoinEmbed, view = view)
-
-        except:
-            # Send embed in the first channel
-            channel = guild.text_channels[0]
-
-            view = ButtonArray()
-            view.response = await channel.send(embed = JoinEmbed, view = view)
+        view = ButtonArray()
+        view.response = await channel.send(embed = JoinEmbed, view = view)
 
 
 # Add error handler to the bot
