@@ -35,5 +35,5 @@ def GetPrefix(Bot: commands.Bot, Message: nextcord.Message):
         # Get and return prefix
         Prefix = GuildData['Options']['Prefix']
     except:
-        Prefix = "."
+        Prefix = Options['DefaultPrefix']
     return Prefix
