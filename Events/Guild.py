@@ -104,7 +104,6 @@ class GuildProfileManager(commands.Cog):
             view.response = await channel.send(embed = JoinEmbed, view = view)
 
 
-
 # Add error handler to the bot
 def setup(bot):
     bot.add_cog(GuildProfileManager(bot))
