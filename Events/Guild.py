@@ -31,7 +31,7 @@ class ButtonArray(View):
     * Context
     """
     def __init__(self):
-        super().__init__(timeout = 30)
+        super().__init__(timeout = 60)
 
         self.response = None    
 
@@ -59,6 +59,7 @@ class GuildProfileManager(commands.Cog):
 
         Triggers when bot joins a guild.
         """
+        print('anc')
         # Get guild profile template
         with open('Settings/Schema/Guild.json', 'r', encoding = 'utf-8') as RawGuildProfile:
             GuildProfileTemplate = json.load(RawGuildProfile)
@@ -75,11 +76,15 @@ class GuildProfileManager(commands.Cog):
         except:
             pass
         
+        # Get join message
+        with open('Assets/JoinMessage.txt', 'r', encoding = 'utf-8') as RawJoinMessage:
+            JoinMessage = RawJoinMessage.read()
+
         # Create Embed
         JoinEmbed = await Custom(
             Options['Emojis']['Integration'],
             "Scrappy!",
-            "Hey there!\n\nThanks for adding me to your server :D\nMy prefix, by default, is `.`"
+            JoinMessage
         )
         
         try:
@@ -89,10 +94,15 @@ class GuildProfileManager(commands.Cog):
             if general and general.permissions_for(guild.me).send_messages:
                 # Send the embed in #general if possible
                 view = ButtonArray()
-                await general.send(embed = JoinEmbed, view = view)
+                view.response = await general.send(embed = JoinEmbed, view = view)
 
         except:
-            pass
+            # Send embed in the first channel
+            channel = guild.text_channels[0]
+
+            view = ButtonArray()
+            view.response = await channel.send(embed = JoinEmbed, view = view)
+
 
 
 # Add error handler to the bot
