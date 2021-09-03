@@ -54,11 +54,12 @@ class Dropdown(Select):
                     for signature in command_signatures:
                         commandslist += f"\n`{signature}`"
 
+                # Create embed and send
                 embed = await Custom(Options['Emojis']['Support'], f"{cog_name}", f"{cog_description}\n\n**Commands List**\n{commandslist}")
-
                 await interaction.response.edit_message(embed = embed)
             
             elif self.values[0] == 'Home':
+                # Send home page embed
                 await interaction.response.edit_message(embed = self.homepage)
 
 
