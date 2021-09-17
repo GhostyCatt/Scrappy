@@ -1,40 +1,10 @@
+# Imports
 import nextcord, traceback, sys, pymongo
 from nextcord.ext import commands
 from nextcord.ui import View, button
 
 from Functions.Embed import *
-
-
-class ButtonArray(View):
-    """
-    ButtonArray
-    -----------
-    
-    Contents: 
-    
-    * Dismiss Button: Deletes Interaction Message
-
-    Arguments: 
-
-    * Context
-    """
-    def __init__(self, ctx):
-        super().__init__(timeout = 30)
-
-        self.response = None
-        self.ctx = ctx
-    
-
-    @button(label = '⛔ Dismiss', style = nextcord.ButtonStyle.blurple)
-    async def  dash_cancel(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        await interaction.message.delete()
-    
-
-    async def on_timeout(self):
-        for child in self.children:
-            child.disabled = True  
-            
-        await self.response.edit(view = self)
+from Views.Dismiss import DismissView
 
 class CommandErrorHandler(commands.Cog):
     """
@@ -89,25 +59,25 @@ class CommandErrorHandler(commands.Cog):
         # Trigger if command used is disabled
         if isinstance(error, commands.DisabledCommand):
             embed = await Fail(f'{ctx.command} has been disabled.')
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if command used is on cooldown
         elif isinstance(error, commands.CommandOnCooldown):
-            embed = await Fail(f'{ctx.command} is on cooldown. `{round(error.retry_after)}`')
-            view = ButtonArray(ctx)
+            embed = await Fail(f'{ctx.command} is on cooldown. `{round(error.retry_after)}seconds`')
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if author doens't meet permissions threshold
         elif isinstance(error, commands.MissingPermissions):
             embed = await Fail(f'You don\'t have the permissions to run {ctx.command}')
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if bot doesn't have the permissions needed to carry out a command
         elif isinstance(error, commands.BotMissingPermissions):
             embed = await Fail(f'I don\'t have enough permissions to handle the {ctx.command} command.')
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if command can't be used in dms
@@ -119,31 +89,31 @@ class CommandErrorHandler(commands.Cog):
         
         # Trigger if any arguments are missing
         elif isinstance(error, commands.MissingRequiredArgument):
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.send_help(ctx.command)
 
         # Trigger if document is too large to be inserted into the database
         elif isinstance(error, pymongo.errors.DocumentTooLarge):
             embed = await Fail(f'What you tried to insert into the database is too large!')
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if the key already exists in the database
         elif isinstance(error, pymongo.errors.DuplicateKeyError):
             embed = await Fail(f'That key already exists in the database.')
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if cursor is invalid
         elif isinstance(error, pymongo.errors.CursorNotFound):
             embed = await Fail(f'The cursor was rendered invalid!')
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
 
         # General error
         else:
             embed = await Fail('Something went wrong in the command **{}**'.format(ctx.command))
-            view = ButtonArray(ctx)
+            view = DismissView(ctx)
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
 
             print('Ignoring exception in command {}:'.format(ctx.command), file = sys.stderr)

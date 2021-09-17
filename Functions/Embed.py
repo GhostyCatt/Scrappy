@@ -1,53 +1,31 @@
-import nextcord, json
+# Imports
+import nextcord
+from nextcord.ext import commands
 
-# Get configuration.json
-with open("Settings/Options.json", "r") as Settings:
-    Options = json.load(Settings)
+# Functions
+async def Success(text:str, ctx:commands.Context = None, timeout:int = None):
+    embed = nextcord.Embed(description = f"`✔️` {text}", color = nextcord.Colour.green())
 
-async def Success(description):
-    """
-    Success
-    -------
-    
-    Inputs
-    * Description: `String`
-    """
-    embed = nextcord.Embed(
-        title = f"Done!",
-        description = description,
-        color = int(Options["Colors"]["Success"], 16)
-    )
-    return embed
+    if not ctx:
+        return embed
+    else:
+        if timeout != None:
+            message = await ctx.reply(embed = embed, mention_author = False, delete_after = timeout)
+            return message
+        else:
+            message = await ctx.reply(embed = embed, mention_author = False)
+            return message
 
 
-async def Fail(description):
-    """
-    Fail
-    ----
-    
-    Inputs
-    * Description: `String`"""
-    embed = nextcord.Embed(
-        title = f"Something went wrong!",
-        description = description,
-        color = int(Options["Colors"]["Fail"], 16)
-    )
-    return embed
+async def Fail(text:str, ctx:commands.Context = None, timeout:int = None):
+    embed = nextcord.Embed(description = f"`❌` {text}", color = nextcord.Colour.red())
 
-
-async def Custom(icon, title, description):
-    """
-    Custom
-    ------
-    
-    Inputs
-    * Icon: `Emoji String`
-    * Title: `Short String`
-    * Description: `String`
-    """
-    embed = nextcord.Embed(
-        title = f"{icon} {title}!",
-        description = description,
-        color = int(Options["Colors"]["Neutral"], 16)
-    )
-    return embed
+    if not ctx:
+        return embed
+    else:
+        if timeout != None:
+            message = await ctx.reply(embed = embed, mention_author = False, delete_after = timeout)
+            return message
+        else:
+            message = await ctx.reply(embed = embed, mention_author = False)
+            return message
