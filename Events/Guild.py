@@ -19,7 +19,6 @@ class GuildProfileManager(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.Cog.listener('on_guild_join') # Task: Change this back to `on_guild_join` once module complete
     async def GuildJoinListener(self, guild:nextcord.Guild):
         print(guild.text_channels)
@@ -42,7 +41,7 @@ class GuildProfileManager(commands.Cog):
             JoinMessage = RawJoinMessage.read()
 
         # Create Embed
-        JoinEmbed = await Custom("Scrappy!", JoinMessage)
+        JoinEmbed = await Success(JoinMessage)
     
         # Send embed in the first channel
         channel = guild.text_channels[0]

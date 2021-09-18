@@ -30,8 +30,8 @@ init(autoreset = True)
 async def on_ready():
     print(
         Fore.LIGHTRED_EX + "Logged into Discord\n" +
-        Fore.RED + f"NextCord Version: {nextcord.__version__}\n" +
-        Fore.RED + f"Scrappy Version: 3"
+        Fore.RED + f"Nextcord Version: {nextcord.__version__}\n" +
+        Fore.RED + f"Scrappy Version: v4"
     )
 
 # Load all cogs

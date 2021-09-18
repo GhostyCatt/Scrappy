@@ -7,12 +7,14 @@ class DismissView(View):
     def __init__(self):
         super().__init__(timeout = 60)
 
-    @button(label = '⛔ Dismiss', style = nextcord.ButtonStyle.blurple)
-    async def  dash_cancel(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+    @button(label = '❌', style = nextcord.ButtonStyle.red)
+    async def  dismiss(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
         await interaction.message.delete()
 
     async def on_timeout(self):
-        for child in self.children:
-            child.disabled = True  
-            
-        await self.response.edit(view = self)
+        try:
+            for child in self.children:
+                child.disabled = True  
+                
+            await self.response.edit(view = self)
+        except: pass

@@ -32,7 +32,6 @@ class CommandErrorHandler(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.Cog.listener('on_command_error')
     async def ErrorListener(self, ctx:commands.Context, error):
         """
@@ -59,25 +58,25 @@ class CommandErrorHandler(commands.Cog):
         # Trigger if command used is disabled
         if isinstance(error, commands.DisabledCommand):
             embed = await Fail(f'{ctx.command} has been disabled.')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if command used is on cooldown
         elif isinstance(error, commands.CommandOnCooldown):
             embed = await Fail(f'{ctx.command} is on cooldown. `{round(error.retry_after)}seconds`')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if author doens't meet permissions threshold
         elif isinstance(error, commands.MissingPermissions):
             embed = await Fail(f'You don\'t have the permissions to run {ctx.command}')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if bot doesn't have the permissions needed to carry out a command
         elif isinstance(error, commands.BotMissingPermissions):
             embed = await Fail(f'I don\'t have enough permissions to handle the {ctx.command} command.')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if command can't be used in dms
@@ -89,36 +88,35 @@ class CommandErrorHandler(commands.Cog):
         
         # Trigger if any arguments are missing
         elif isinstance(error, commands.MissingRequiredArgument):
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.send_help(ctx.command)
 
         # Trigger if document is too large to be inserted into the database
         elif isinstance(error, pymongo.errors.DocumentTooLarge):
             embed = await Fail(f'What you tried to insert into the database is too large!')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if the key already exists in the database
         elif isinstance(error, pymongo.errors.DuplicateKeyError):
             embed = await Fail(f'That key already exists in the database.')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
         
         # Trigger if cursor is invalid
         elif isinstance(error, pymongo.errors.CursorNotFound):
             embed = await Fail(f'The cursor was rendered invalid!')
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
 
         # General error
         else:
             embed = await Fail('Something went wrong in the command **{}**'.format(ctx.command))
-            view = DismissView(ctx)
+            view = DismissView()
             view.response = await ctx.reply(embed = embed, view = view, mention_author = False)
 
             print('Ignoring exception in command {}:'.format(ctx.command), file = sys.stderr)
             traceback.print_exception(type(error), error, error.__traceback__, file = sys.stderr)
-
 
     @commands.command(name = 'repeat', aliases = ['mimic', 'copy'])
     async def do_repeat(self, ctx, *, input: str):

@@ -1,0 +1,61 @@
+{
+    "_id": null,
+    
+    "Autorole": {
+        "Status": false,
+        "Options": {
+            "Member": [],
+            "Bot": []
+        }
+    },
+    "Reactionrole": {
+        "Status": false,
+        "Options": {
+            "One": {
+                "Display": null,
+                "Role": null
+            },
+            "Two": {
+                "Display": null,
+                "Role": null
+            },
+            "Three": {
+                "Display": null,
+                "Role": null
+            },
+            "Four": {
+                "Display": null,
+                "Role": null
+            },
+            "Five": {
+                "Display": null,
+                "Role": null
+            }
+        }
+    },
+    "Buttonmenu": {
+        "Status": false,
+        "Options": {
+            "One": {
+                "Display": null,
+                "Role": null
+            },
+            "Two": {
+                "Display": null,
+                "Role": null
+            },
+            "Three": {
+                "Display": null,
+                "Role": null
+            },
+            "Four": {
+                "Display": null,
+                "Role": null
+            },
+            "Five": {
+                "Display": null,
+                "Role": null
+            }
+        }
+    }
+}

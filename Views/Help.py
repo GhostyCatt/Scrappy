@@ -12,31 +12,19 @@ with open('Settings/Options.json') as Settings:
 
 # Button array for the main help command embed
 class HelpView(View):
-    def __init__(self, ctx):
+    def __init__(self, ctx:commands.Context):
         super().__init__(timeout = 30)
 
-        self.response = None
         self.ctx = ctx
-        
+
         self.add_item(nextcord.ui.Button(label = "Invite Me", url = Options['InviteLink']))
         self.add_item(nextcord.ui.Button(label = "Website", url = Options['Website']))
-    
 
-    @button(label = 'Home Page', style = nextcord.ButtonStyle.green)
-    async def dash_home(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        """Return to home page"""
-        await interaction.response.edit_message(embed = self.homepage)
-
-
-    @button(label = 'Disable', style = nextcord.ButtonStyle.red)
-    async def  dash_cancel(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        """Disable all interactions"""
-        for child in self.children:
-            child.disabled = True  
-        await self.response.edit(view = self)
-        
-        self.stop()
-
+    @button(label = '🗑️', style = nextcord.ButtonStyle.red)
+    async def  delete(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+        """Delete the interaction"""
+        await interaction.message.delete()
+        await self.ctx.message.delete()
 
     async def on_timeout(self):
         """Disable all interactions on timeout"""
