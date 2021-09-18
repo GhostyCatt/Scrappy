@@ -42,7 +42,8 @@ cogs = [
     "Events.Guild",
 
     # Modules
-    "Modules.ErrorHandler"
+    "Modules.ErrorHandler",
+    "Modules.Reactions",
 ]
 
 if __name__ == '__main__':
