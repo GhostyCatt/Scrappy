@@ -21,7 +21,6 @@ class GuildProfileManager(commands.Cog):
 
     @commands.Cog.listener('on_guild_join') # Task: Change this back to `on_guild_join` once module complete
     async def GuildJoinListener(self, guild:nextcord.Guild):
-        print(guild.text_channels)
         # Get guild profile template
         with open('Settings/Schema/Guild.json', 'r', encoding = 'utf-8') as RawGuildProfile:
             GuildProfileTemplate = json.load(RawGuildProfile)
